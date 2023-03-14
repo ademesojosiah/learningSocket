@@ -11,6 +11,11 @@ app.get('/home',(req,res)=>{
 
 io.on('connection', (socket)=>{
     console.log('server connected' + socket.id);
+
+
+    socket.on('value',(value)=>{
+        socket.emit('send',value)
+    })
 })
 
 

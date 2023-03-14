@@ -17,12 +17,20 @@
     const socket = io("http://localhost:3002")
 
 
+
+
+
     function sendInfo(){
+
         const messageInput = document.querySelector('.message')
         const value = messageInput.value
 
+        socket.emit('value',value)
         document.querySelector("h1").innerHTML = value
 
+        socket.on('send',info=>{
+            console.log(info)
+        })
     }
 </script>
 </body>
