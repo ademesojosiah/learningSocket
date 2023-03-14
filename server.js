@@ -9,6 +9,10 @@ app.get('/home',(req,res)=>{
     res.render("home")
 })
 
+io.on('connection', (socket)=>{
+    console.log('server connected' + socket.id);
+})
+
 
 server.listen(3002,()=>{
     console.log('server running');
