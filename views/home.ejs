@@ -10,14 +10,20 @@
 <body>
 <input type="text" name="" class="message">
 <button onclick=sendInfo()>send</button>
+<button onclick=deleteParent()>delete Parent</button>
 <h1></h1>
+<div class="chatBox"></div>
 
     
 <script>
     const socket = io("http://localhost:3002")
 
+    const chatBox = document.querySelector('.chatBox')
 
 
+    socket.on('send',info=>{
+            console.log(info)
+        })
 
 
     function sendInfo(){
@@ -26,11 +32,18 @@
         const value = messageInput.value
 
         socket.emit('value',value)
-        document.querySelector("h1").innerHTML = value
+        const div = document.createElement('div')
+        div.classList.add('fresh')
+        div.style.backgroundColor = 'blue'
+        div.style.color = 'white'
+        div.innerHTML = value
+        chatBox.append(div)
+    }
 
-        socket.on('send',info=>{
-            console.log(info)
-        })
+
+    function deleteParent(){
+        const fresh = document.querySelector('.fresh')
+        fresh.remove()
     }
 </script>
 </body>
